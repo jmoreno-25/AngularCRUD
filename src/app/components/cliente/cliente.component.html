@@ -1,0 +1,45 @@
+<div class="app">
+  <h1 class="header">Gestión de Clientes</h1>
+
+  <p *ngIf="mensaje" class="mensaje-exito">{{ mensaje }}</p>
+
+  <button (click)="abrirCrear()">Crear Cliente</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cédula</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Teléfono</th>
+        <th>Estado</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of clientes">
+        <td>{{ p.CLI_CEDULA_RUC }}</td>
+        <td>{{ p.CLI_NOMBRE }}</td>
+        <td>{{ p.CLI_APELLIDO }}</td>
+        <td>{{ p.CLI_TELEFONO }}</td>
+        <td>{{ p.CLI_ESTADO }}</td>
+        <td><button (click)="editar(p)">Editar</button></td>
+        <td><button (click)="eliminar(p.CLI_CEDULA_RUC)">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="mostrarForm" class="modal-overlay">
+    <div class="modal">
+      <h2>{{ esEdicion ? 'Editar Cliente' : 'Crear Cliente' }}</h2>
+      <input [(ngModel)]="form.CLI_CEDULA_RUC" placeholder="Cédula/RUC">
+      <input [(ngModel)]="form.CLI_NOMBRE" placeholder="Nombre">
+      <input [(ngModel)]="form.CLI_APELLIDO" placeholder="Apellido">
+      <input [(ngModel)]="form.CLI_TELEFONO" placeholder="Teléfono">
+      <input [(ngModel)]="form.CLI_ESTADO" placeholder="Estado">
+      <button (click)="guardar()">Guardar</button>
+      <button (click)="cerrarForm()">Cancelar</button>
+    </div>
+  </div>
+</div>
